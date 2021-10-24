@@ -6,18 +6,19 @@ export const sayHi = (req:Request,res:Response) => {
     res.send('HOLA MUNDO');
 }
 
-export const createTables = async (req:Request,res:Response) => {
+export const createTables = async (req:Request,res:Response): Promise<Response> => {
     try {
-        await pool.query('CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY,name VARCHAR(40),email TEXT);',(err,res) => {
-            console.log(err,res);
-        })
+        await pool.query(
+            'CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY,name VARCHAR(40) NOT NULL,email TEXT NOT NULL UNIQUE);',
+            (err,res) => console.log(err,res) )
         await pool.query(
         'INSERT INTO users(name, email) VALUES ($1, $2),($3, $4);',
-        ['joe','joe@ibm.com','ryan', 'ryan@faztweb.com']);
+        ['seba','seba@italia.com','lucas', 'lucas@gmail.com']);
 
-        res.send('HOLA MUNDO Docker again');
+        return res.send('Table users created');
     } catch (e) {
         console.log(e)
+        return res.send('Internal Error');
     }
 }
 

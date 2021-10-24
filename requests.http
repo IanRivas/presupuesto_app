@@ -27,3 +27,33 @@ Content-Type: application/json
     "name": "ian",
     "email": "ianrivas@gmail.com"
 }
+
+//---------------OPERATIONS--------------------
+
+### GET OPERATIONS BY ID (userid params)
+GET http://localhost:3000/operations/1
+
+### CREATE OPERATIONS (userid params)
+POST http://localhost:3000/operations/1
+Content-Type: application/json
+
+{
+    "concepto": "netflix",
+    "monto": "1000",
+    "fecha": "2021-10-24",
+    "tipo": "ingreso"
+}
+
+### DELETE OPERATIONS (id params)
+DELETE http://localhost:3000/operations/1
+
+### PUT USER  (id params)
+PUT http://localhost:3000/operations/2
+Content-Type: application/json
+
+{
+    "concepto": "netflix",
+    "monto": "1200",
+    "fecha": "2021-10-24",
+    "tipo": "ingreso"
+}
