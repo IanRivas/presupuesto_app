@@ -1,0 +1,29 @@
+@api = http://localhost:3000
+
+//---------------USERS--------------------
+### GET USERS
+GET {{api}}/users
+
+### GET USER BY ID
+GET http://localhost:3000/users/1
+
+### POST USER
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "ian",
+    "email": "ian@gmail.com"
+}
+
+### DELETE USER
+DELETE http://localhost:3000/users/3
+
+### PUT USER 
+PUT http://localhost:3000/users/4
+Content-Type: application/json
+
+{
+    "name": "ian",
+    "email": "ianrivas@gmail.com"
+}
