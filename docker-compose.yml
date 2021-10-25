@@ -1,15 +1,20 @@
 version: "3.8"
 
 services: 
-  app:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+  client:
+    build: .
+    volumes:
+      - "./client:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  api:
+    build: .
     ports: 
-      - 3000:3000
+      - 3001:3000
     volumes: 
-      - .:/app
-      - '/app/node_modules'
+      - "./api:/app"
     depends_on: 
       - postgres
   

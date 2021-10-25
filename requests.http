@@ -1,14 +1,14 @@
-@api = http://localhost:3000
+@api = http://localhost:3001
 
 //---------------USERS--------------------
 ### GET USERS
 GET {{api}}/users
 
 ### GET USER BY ID
-GET http://localhost:3000/users/1
+GET http://localhost:3001/users/1
 
 ### POST USER
-POST http://localhost:3000/users
+POST http://localhost:3001/users
 Content-Type: application/json
 
 {
@@ -17,10 +17,10 @@ Content-Type: application/json
 }
 
 ### DELETE USER
-DELETE http://localhost:3000/users/3
+DELETE http://localhost:3001/users/3
 
 ### PUT USER 
-PUT http://localhost:3000/users/4
+PUT http://localhost:3001/users/4
 Content-Type: application/json
 
 {
@@ -31,10 +31,10 @@ Content-Type: application/json
 //---------------OPERATIONS--------------------
 
 ### GET OPERATIONS BY ID (userid params)
-GET http://localhost:3000/operations/1
+GET http://localhost:3001/operations/1
 
 ### CREATE OPERATIONS (userid params)
-POST http://localhost:3000/operations/1
+POST http://localhost:3001/operations/1
 Content-Type: application/json
 
 {
@@ -45,10 +45,10 @@ Content-Type: application/json
 }
 
 ### DELETE OPERATIONS (id params)
-DELETE http://localhost:3000/operations/1
+DELETE http://localhost:3001/operations/1
 
 ### PUT USER  (id params)
-PUT http://localhost:3000/operations/2
+PUT http://localhost:3001/operations/2
 Content-Type: application/json
 
 {

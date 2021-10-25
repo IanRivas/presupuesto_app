@@ -1,7 +1,5 @@
 ## Things to do
-- table 2
-- routes
-- frontend 
+- frontend
 - login 
 - deploy aws
 
