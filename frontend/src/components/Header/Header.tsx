@@ -1,7 +1,6 @@
 import React from 'react';
-
-import moonDark from '../../assets/dark.svg'
-import moonLight from '../../assets/light.svg'
+import {BsMoonStarsFill} from 'react-icons/bs';
+import {BsMoonStars} from 'react-icons/bs';
 
 import {Wrapper} from './Header.styles';
 
@@ -19,11 +18,17 @@ function Header({isTheme, themeToggler}:props): JSX.Element {
                 <h2>Presupuesto</h2>
                 <button onClick={() => themeToggler()}>
                 { isTheme? (
-                    <img alt="themeLogo" src={moonDark} /> 
+                    <>
+                      <BsMoonStarsFill />
+                      <span>Light Mode</span>
+                    </>
                     ) : (
-                    <img alt="themeLogo" src={moonLight} />)
+                    <>
+                      <BsMoonStars />
+                      <span>Dark Mode</span>
+                    </>
+                    )
                 }
-                    Dark Mode
                 </button>
             </div>
         </Wrapper>

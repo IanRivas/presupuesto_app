@@ -1,20 +1,20 @@
 version: "3.8"
 
 services: 
-  client:
+  frontend:
     build: .
     volumes:
-      - "./client:/app"
+      - "./frontend:/app"
     ports:
       - "3000:3000"
     depends_on:
-      - api
-  api:
+      - backend
+  backend:
     build: .
     ports: 
       - 3001:3000
     volumes: 
-      - "./api:/app"
+      - "./backend:/app"
     depends_on: 
       - postgres
   

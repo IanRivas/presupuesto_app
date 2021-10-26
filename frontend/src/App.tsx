@@ -22,7 +22,7 @@ function App(): JSX.Element {
         <Header isTheme={theme} themeToggler={themeToggler} />
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home isTheme={theme} />
           </Route>
         </Switch>
       </Router>

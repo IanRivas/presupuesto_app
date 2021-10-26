@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   box-shadow: 0px 1px 5px 5px ${(props) => props.theme.box};
   background-color: ${(props) => props.theme.rest};
-  position: sticky;
+  position: fixed;
   z-index: 10;
   top: 0;
   right: 0;

@@ -11,3 +11,5 @@ export const darkTheme = {
     fontColor: '#fff',
     box: 'transparent',
 }
+
+
