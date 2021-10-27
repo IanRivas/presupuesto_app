@@ -1,15 +1,16 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, Dispatch,SetStateAction} from "react";
+import { operation } from '../../views/Home/Home';
 
 import {Modaldiv} from "./Modal.styles";
 
 type ModalProps = {
   show: boolean;
   handle: () => void;
-  // add: (c) => void;
+  add: Dispatch<SetStateAction<operation[]>>;
   isTheme: boolean;
 };
 
-function Modal({show/* , add */, handle,isTheme }: ModalProps) {
+function Modal({show/* , add */, handle,isTheme, add }: ModalProps) {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commentsRef = useRef<HTMLInputElement | null>(null);
   const contactRef = useRef<HTMLInputElement | null>(null);

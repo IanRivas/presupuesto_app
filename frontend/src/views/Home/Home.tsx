@@ -41,7 +41,7 @@ function Home({isTheme}:HomeProps): JSX.Element {
   }
   return (
     <Wrapper>
-      <Modal show={show} handle={handleModal} isTheme={isTheme} />
+      <Modal show={show} handle={handleModal} isTheme={isTheme} add={setOperations} />
       <Table operations={operations} handle={handleModal}  isTheme={isTheme} />
     </Wrapper>
   );
