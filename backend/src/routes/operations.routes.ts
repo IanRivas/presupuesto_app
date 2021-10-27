@@ -1,8 +1,7 @@
 import {Router} from 'express';
 const router = Router();
-import {createTables,getOperationsById,createOperations,editOperations,deleteOperations} from '../controllers/operations.controller';
+import {getOperationsById,createOperations,editOperations,deleteOperations} from '../controllers/operations.controller';
 
-router.get('/createTableOperations',createTables);
 router.get('/operations/:userId',getOperationsById);
 router.post('/operations/:userId', createOperations);
 router.put('/operations/:id', editOperations);

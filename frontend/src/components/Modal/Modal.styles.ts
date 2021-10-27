@@ -26,13 +26,21 @@ export const Modaldiv = styled.div`
         transform: translate(-50%,-50%);
         padding: 15px 15px;
         z-index: 1;
+        border-radius: 5px;
         div:first-child{
             position: relative;
             margin-bottom: 20px;
+            & h4 {
+                margin-top: 5px;
+            }
             .closebtn{
+                background-color: tomato;
+                color: white;
                 position: absolute;
                 top: 0;
                 right: 0;
+                border-radius: 5px;
+                padding: 2px 5px;;
             }
         }
         .inputModal{

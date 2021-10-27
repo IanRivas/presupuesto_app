@@ -2,25 +2,6 @@ import {Request, Response} from 'express';
 import {pool} from '../database';
 import { QueryResult } from 'pg';
 
-export const createTables = async (req:Request,res:Response): Promise<Response> => {
-    try {
-        await pool.query(
-            `CREATE TABLE IF NOT EXISTS operations(
-                id SERIAL PRIMARY KEY,
-                user_id INTEGER NOT NULL,
-                concepto VARCHAR(40) NOT NULL,
-                monto MONEY NOT NULL,
-                fecha DATE NOT NULL,
-                tipo VARCHAR(10) NOT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(id)
-            );`,
-            (err,res) => console.log(err,res) )
-        return res.status(200).send('operations table created successfully');
-    } catch (e) {
-        console.log(e);
-        return res.send('Internal Error');
-    }
-}
 export const getOperationsById = async (req:Request,res:Response): Promise<Response> => {
     try {
         const userId = req.params.userId;
@@ -50,7 +31,7 @@ export const editOperations = async (req:Request,res:Response): Promise<Response
         const {concepto,monto,fecha,tipo} = req.body;
         await pool.query(
            `UPDATE operations 
-            SET concepto = $1, monto = $2, fecha = $3 ,tipo = $4
+            SET concepto = $1, monto = $2, fecha = $3 
             WHERE id = $5;`,[concepto,monto,fecha,tipo,id])
         return res.status(200).send('operations updated successfully');
     } catch (e) {

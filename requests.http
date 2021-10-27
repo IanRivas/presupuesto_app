@@ -1,4 +1,7 @@
 @api = http://localhost:3001
+//----------------BUILD ------------------
+### CREATE tables and INSERT data to Tables
+GET {{api}}/build
 
 //---------------USERS--------------------
 ### GET USERS
