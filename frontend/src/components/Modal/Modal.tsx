@@ -1,103 +1,90 @@
-import React, {useRef, useState, Dispatch,SetStateAction} from "react";
-import { operation } from '../../views/Home/Home';
+import React, { Dispatch, SetStateAction} from "react";
+import { operation,tipo } from '../../views/Home/Home';
 
 import {Modaldiv} from "./Modal.styles";
 
 type ModalProps = {
-  show: boolean;
-  handle: () => void;
   add: Dispatch<SetStateAction<operation[]>>;
+  handleModal: () => void;
   isTheme: boolean;
+  show: boolean;
 };
 
-function Modal({show/* , add */, handle,isTheme, add }: ModalProps) {
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  const commentsRef = useRef<HTMLInputElement | null>(null);
-  const contactRef = useRef<HTMLInputElement | null>(null);
-  const [textName, setTextname] = useState("");
-  const [textComment, setTextcomment] = useState("");
-  const [textContact, setTextContact] = useState("");
+interface Form extends HTMLFormElement{
+  concepto: HTMLInputElement;
+  monto: HTMLInputElement;
+  fecha: HTMLInputElement;
+  tipo: HTMLInputElement;
+}
 
-  // const addCandidate = () => {
-  //   const c: Candidate | null = {
-  //     name: nameRef.current?.value,
-  //     step: "Envié CV",
-  //     contacto: contactRef.current?.value,
-  //     comments: commentsRef.current?.value,
-  //   };
+function Modal({ add, handleModal, isTheme, show}: ModalProps) {
 
-  //   add(c);
-  //   let item: string | null = "";
-  //   let itemN = [];
-
-  //   item = localStorage.getItem("postulaciones");
-  //   if (item !== null) {
-  //     itemN = JSON.parse(item);
-  //   }
-  //   itemN.push(c);
-  //   localStorage.setItem("postulaciones", JSON.stringify(itemN));
-  //   setTextname("");
-  //   setTextcomment("");
-  //   setTextContact("");
-  //   handle();
-  // };
+  const addOperation = (event: React.ChangeEvent<Form>) => {
+    event.preventDefault();
+    if (event.target.tipo.value.toLowerCase() === 'ingreso' || event.target.tipo.value.toLowerCase() === 'egreso' ){
+      const oper = {
+        concepto: event.target.concepto.value,
+        monto: event.target.monto.value,
+        fecha: event.target.fecha.value,
+        tipo: event.target.tipo.value.toLowerCase() as tipo,
+      }
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(oper)
+      };
+      window.fetch('http://localhost:3001/operations/1',requestOptions)
+        .then(data => console.log(data))
+        .then(() => add((items) => [...items, oper]));
+    }
+    handleModal();
+  };
 
   return (
     <>
     {show ? 
      (<Modaldiv> 
-        <div className="exit" onClick={handle}>
+        <div className="exit" onClick={handleModal}>
           {""}
         </div>
         <section className="modalMain">
           <div>
-            <h4>Agregar Postulación</h4>
-            <button className="closebtn" onClick={handle}>
+            <h4>Agregar Operación</h4>
+            <button className="closebtn" onClick={handleModal}>
             X
             </button>
           </div>
-          <div className="inputModal">
-          <span>Concepto:</span>
-          <input
-            ref={nameRef}
-            type="text"
-            value={textName}
-            onChange={(e) => setTextname(e.target.value)}
-          />
-          </div>
-          <div className="inputModal">
-          <span>Monto:</span>
-          <input
-            ref={contactRef}
-            type="number"
-            value={textContact}
-            min="1"
-            step="any"
-            placeholder="$"
-            onChange={(e) => setTextContact(e.target.value)}
-          />
-          </div>
-          <div className="inputModal">
-          <span>Fecha:</span>
-          <input
-            ref={commentsRef}
-            type="date"
-            value={textComment}
-            onChange={(e) => setTextcomment(e.target.value)}
+          <form onSubmit={addOperation} className="inputModal">
+            <span>Concepto:</span>
+            <input
+              name="concepto"
+              type="text"
+              required
             />
-          <span>Tipo:</span>
-          <input type="text" name="IngEgr" list="datalist-dogs" placeholder="Ingreso o Egreso" />
-          <datalist id="datalist-dogs">
-              <select name="IngEgr">
-                  <option>Ingreso</option>
-                  <option>Egreso</option>
-              </select>
-          </datalist>
-
-          </div>
-          {/* <button className="btnAgregar" onClick={addCandidate}>
-          Agregar
-          </button> */}
+            <span>Monto:</span>
+            <input
+              name="monto"
+              type="number"
+              min="1"
+              step="any"
+              placeholder="$"
+              required
+            />
+            <span>Fecha:</span>
+            <input
+              name="fecha"
+              type="date"
+              required
+              />
+            <span>Tipo:</span>
+            <input type="text" name="tipo" placeholder="Ingreso o Egreso" required/>
+            <div className="btn-container">
+              <button type="submit" className="btnAgregar">
+                Agregar
+              </button>
+            </div>
+          </form>
         </section>
       </Modaldiv> ) : null
       }

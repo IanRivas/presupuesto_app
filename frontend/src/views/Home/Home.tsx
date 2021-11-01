@@ -1,33 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from '../../components/Modal';
 import Table from '../../components/Table';
 
 import { Wrapper } from './Home.styles';
 
-export interface operation  {
-  id: number;
-  concepto: string;
-  monto: number;
-  fecha: string;
-  tipo: 'ingreso' | 'egreso';
-};
+export type tipo = 'ingreso' | 'egreso'
 
-const example:Array<operation> = [
-  {
-    id: 1,
-    concepto: 'netflix',
-    monto: 800,
-    fecha: '21-10-2021',
-    tipo: 'egreso'
-  },
-  {
-    id: 1,
-    concepto: 'mcdonals',
-    monto: 1000,
-    fecha: '26-10-2021',
-    tipo: 'egreso'
-  }
-]
+export interface operation  {
+  id?: number;
+  concepto: string;
+  monto: string;
+  fecha: string;
+  tipo: tipo;
+};
 
 type HomeProps = {
   isTheme: boolean;
@@ -35,14 +20,22 @@ type HomeProps = {
 
 function Home({isTheme}:HomeProps): JSX.Element {
   const [show, setShow] = useState(false);
-  const [operations, setOperations] = useState<operation[]>(example);
+  const [operations, setOperations] = useState<operation[]>([]);
+
+  useEffect(()=>{
+    window.fetch('http://localhost:3001/operations/1')
+      .then(res => res.json())
+      .then(data => setOperations(data));
+  
+  },[])
+
   const handleModal = () => {
     setShow(!show);
   }
   return (
     <Wrapper>
-      <Modal show={show} handle={handleModal} isTheme={isTheme} add={setOperations} />
-      <Table operations={operations} handle={handleModal}  isTheme={isTheme} />
+      <Modal show={show} handleModal={handleModal} isTheme={isTheme} add={setOperations} />
+      <Table operations={operations} handleModal={handleModal}  isTheme={isTheme} setOperations={setOperations} />
     </Wrapper>
   );
 }

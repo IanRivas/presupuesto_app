@@ -20,7 +20,7 @@ export const Modaldiv = styled.div`
         position:fixed;
         background: white;
         width: 40%;
-        height: 235px;
+        height: 245px;
         top:50%;
         left:50%;
         transform: translate(-50%,-50%);
@@ -51,9 +51,14 @@ export const Modaldiv = styled.div`
                 text-align: left;
             }
         }
-        .btnAgregar{
-            margin-top: 15px;
-            width: 20%;
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .btnAgregar{
+                margin: 15px 0;
+                width: 20%;
+            }
         }
     
     }
