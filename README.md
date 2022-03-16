@@ -1,9 +1,3 @@
-## Things to do
-- end frontend
-- login 
-- categorias
-- deploy
-
 # Alkemy Challenge
 
 Running This App
